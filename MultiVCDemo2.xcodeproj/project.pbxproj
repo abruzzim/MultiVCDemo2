@@ -7,9 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF350CFA1AD806A000FD7D81 /* MainTBC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF350CF91AD806A000FD7D81 /* MainTBC.m */; };
+		AF350D001AD80BED00FD7D81 /* TransportsNC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF350CFF1AD80BED00FD7D81 /* TransportsNC.m */; };
+		AF350D031AD8127C00FD7D81 /* TransportsParentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF350D021AD8127C00FD7D81 /* TransportsParentVC.m */; };
+		AF350D061AD8153B00FD7D81 /* TransportsMasterTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF350D051AD8153B00FD7D81 /* TransportsMasterTVC.m */; };
+		AF350D091AD8167400FD7D81 /* Transports.m in Sources */ = {isa = PBXBuildFile; fileRef = AF350D081AD8167400FD7D81 /* Transports.m */; };
+		AF350D0C1AD81CF100FD7D81 /* Transport.m in Sources */ = {isa = PBXBuildFile; fileRef = AF350D0B1AD81CF100FD7D81 /* Transport.m */; };
 		AF49BCBE1AD771EC00FA95E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AF49BCBD1AD771EC00FA95E9 /* main.m */; };
 		AF49BCC11AD771EC00FA95E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AF49BCC01AD771EC00FA95E9 /* AppDelegate.m */; };
-		AF49BCC41AD771EC00FA95E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF49BCC31AD771EC00FA95E9 /* ViewController.m */; };
 		AF49BCC71AD771EC00FA95E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF49BCC51AD771EC00FA95E9 /* Main.storyboard */; };
 		AF49BCC91AD771EC00FA95E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF49BCC81AD771EC00FA95E9 /* Images.xcassets */; };
 		AF49BCCC1AD771EC00FA95E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF49BCCA1AD771EC00FA95E9 /* LaunchScreen.xib */; };
@@ -27,13 +32,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF350CF81AD806A000FD7D81 /* MainTBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTBC.h; sourceTree = "<group>"; };
+		AF350CF91AD806A000FD7D81 /* MainTBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTBC.m; sourceTree = "<group>"; };
+		AF350CFE1AD80BED00FD7D81 /* TransportsNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportsNC.h; sourceTree = "<group>"; };
+		AF350CFF1AD80BED00FD7D81 /* TransportsNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportsNC.m; sourceTree = "<group>"; };
+		AF350D011AD8127C00FD7D81 /* TransportsParentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportsParentVC.h; sourceTree = "<group>"; };
+		AF350D021AD8127C00FD7D81 /* TransportsParentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportsParentVC.m; sourceTree = "<group>"; };
+		AF350D041AD8153B00FD7D81 /* TransportsMasterTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportsMasterTVC.h; sourceTree = "<group>"; };
+		AF350D051AD8153B00FD7D81 /* TransportsMasterTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportsMasterTVC.m; sourceTree = "<group>"; };
+		AF350D071AD8167400FD7D81 /* Transports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transports.h; sourceTree = "<group>"; };
+		AF350D081AD8167400FD7D81 /* Transports.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transports.m; sourceTree = "<group>"; };
+		AF350D0A1AD81CF100FD7D81 /* Transport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transport.h; sourceTree = "<group>"; };
+		AF350D0B1AD81CF100FD7D81 /* Transport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transport.m; sourceTree = "<group>"; };
 		AF49BCB81AD771EC00FA95E9 /* MultiVCDemo2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MultiVCDemo2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF49BCBC1AD771EC00FA95E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF49BCBD1AD771EC00FA95E9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AF49BCBF1AD771EC00FA95E9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AF49BCC01AD771EC00FA95E9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AF49BCC21AD771EC00FA95E9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AF49BCC31AD771EC00FA95E9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		AF49BCC61AD771EC00FA95E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF49BCC81AD771EC00FA95E9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AF49BCCB1AD771EC00FA95E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -83,8 +98,18 @@
 			children = (
 				AF49BCBF1AD771EC00FA95E9 /* AppDelegate.h */,
 				AF49BCC01AD771EC00FA95E9 /* AppDelegate.m */,
-				AF49BCC21AD771EC00FA95E9 /* ViewController.h */,
-				AF49BCC31AD771EC00FA95E9 /* ViewController.m */,
+				AF350CF81AD806A000FD7D81 /* MainTBC.h */,
+				AF350CF91AD806A000FD7D81 /* MainTBC.m */,
+				AF350CFE1AD80BED00FD7D81 /* TransportsNC.h */,
+				AF350CFF1AD80BED00FD7D81 /* TransportsNC.m */,
+				AF350D011AD8127C00FD7D81 /* TransportsParentVC.h */,
+				AF350D021AD8127C00FD7D81 /* TransportsParentVC.m */,
+				AF350D041AD8153B00FD7D81 /* TransportsMasterTVC.h */,
+				AF350D051AD8153B00FD7D81 /* TransportsMasterTVC.m */,
+				AF350D071AD8167400FD7D81 /* Transports.h */,
+				AF350D081AD8167400FD7D81 /* Transports.m */,
+				AF350D0A1AD81CF100FD7D81 /* Transport.h */,
+				AF350D0B1AD81CF100FD7D81 /* Transport.m */,
 				AF49BCC51AD771EC00FA95E9 /* Main.storyboard */,
 				AF49BCC81AD771EC00FA95E9 /* Images.xcassets */,
 				AF49BCCA1AD771EC00FA95E9 /* LaunchScreen.xib */,
@@ -219,9 +244,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF49BCC41AD771EC00FA95E9 /* ViewController.m in Sources */,
 				AF49BCC11AD771EC00FA95E9 /* AppDelegate.m in Sources */,
+				AF350CFA1AD806A000FD7D81 /* MainTBC.m in Sources */,
+				AF350D091AD8167400FD7D81 /* Transports.m in Sources */,
+				AF350D0C1AD81CF100FD7D81 /* Transport.m in Sources */,
+				AF350D031AD8127C00FD7D81 /* TransportsParentVC.m in Sources */,
+				AF350D001AD80BED00FD7D81 /* TransportsNC.m in Sources */,
 				AF49BCBE1AD771EC00FA95E9 /* main.m in Sources */,
+				AF350D061AD8153B00FD7D81 /* TransportsMasterTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +444,7 @@
 				AF49BCDD1AD771EC00FA95E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AF49BCDE1AD771EC00FA95E9 /* Build configuration list for PBXNativeTarget "MultiVCDemo2Tests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +453,7 @@
 				AF49BCE01AD771EC00FA95E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
