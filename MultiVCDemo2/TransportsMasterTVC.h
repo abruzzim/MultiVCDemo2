@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class TransportDetailTVC;
+
 @interface TransportsMasterTVC : UITableViewController
+
+@property (strong, nonatomic) TransportDetailTVC *transportDetailTVC;
 
 @end

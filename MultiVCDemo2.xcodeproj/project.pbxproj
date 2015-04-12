@@ -19,6 +19,8 @@
 		AF49BCC91AD771EC00FA95E9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF49BCC81AD771EC00FA95E9 /* Images.xcassets */; };
 		AF49BCCC1AD771EC00FA95E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF49BCCA1AD771EC00FA95E9 /* LaunchScreen.xib */; };
 		AF49BCD81AD771EC00FA95E9 /* MultiVCDemo2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = AF49BCD71AD771EC00FA95E9 /* MultiVCDemo2Tests.m */; };
+		AFB4A8691ADACEB7008D6A40 /* TransportDetailTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4A8681ADACEB7008D6A40 /* TransportDetailTVC.m */; };
+		AFB4A86C1ADAD71D008D6A40 /* TransportDetailItem.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4A86B1ADAD71C008D6A40 /* TransportDetailItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,10 @@
 		AF49BCD11AD771EC00FA95E9 /* MultiVCDemo2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MultiVCDemo2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF49BCD61AD771EC00FA95E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF49BCD71AD771EC00FA95E9 /* MultiVCDemo2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MultiVCDemo2Tests.m; sourceTree = "<group>"; };
+		AFB4A8671ADACEB7008D6A40 /* TransportDetailTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportDetailTVC.h; sourceTree = "<group>"; };
+		AFB4A8681ADACEB7008D6A40 /* TransportDetailTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportDetailTVC.m; sourceTree = "<group>"; };
+		AFB4A86A1ADAD71C008D6A40 /* TransportDetailItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransportDetailItem.h; sourceTree = "<group>"; };
+		AFB4A86B1ADAD71C008D6A40 /* TransportDetailItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransportDetailItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,10 @@
 				AF350D021AD8127C00FD7D81 /* TransportsParentVC.m */,
 				AF350D041AD8153B00FD7D81 /* TransportsMasterTVC.h */,
 				AF350D051AD8153B00FD7D81 /* TransportsMasterTVC.m */,
+				AFB4A8671ADACEB7008D6A40 /* TransportDetailTVC.h */,
+				AFB4A8681ADACEB7008D6A40 /* TransportDetailTVC.m */,
+				AFB4A86A1ADAD71C008D6A40 /* TransportDetailItem.h */,
+				AFB4A86B1ADAD71C008D6A40 /* TransportDetailItem.m */,
 				AF350D071AD8167400FD7D81 /* Transports.h */,
 				AF350D081AD8167400FD7D81 /* Transports.m */,
 				AF350D0A1AD81CF100FD7D81 /* Transport.h */,
@@ -245,7 +255,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF49BCC11AD771EC00FA95E9 /* AppDelegate.m in Sources */,
+				AFB4A86C1ADAD71D008D6A40 /* TransportDetailItem.m in Sources */,
 				AF350CFA1AD806A000FD7D81 /* MainTBC.m in Sources */,
+				AFB4A8691ADACEB7008D6A40 /* TransportDetailTVC.m in Sources */,
 				AF350D091AD8167400FD7D81 /* Transports.m in Sources */,
 				AF350D0C1AD81CF100FD7D81 /* Transport.m in Sources */,
 				AF350D031AD8127C00FD7D81 /* TransportsParentVC.m in Sources */,

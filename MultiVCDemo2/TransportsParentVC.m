@@ -8,17 +8,22 @@
 
 #import "TransportsParentVC.h"
 #import "TransportsMasterTVC.h" // 1st Child VC.
+#import "TransportDetailTVC.h"  // 2nd Child VC.
 
 #define STATUS_BAR_HEIGHT 20.0
 #define TOOLBAR_HEIGHT 44.0
-#define CHILD1_WIDTH_FACTOR (1.0/2.0)
+#define CHILD1_WIDTH_FACTOR (1.0/3.0)
 #define CHILD1_HEIGHT_FACTOR (1.0/1.0)
+#define CHILD2_WIDTH_FACTOR (1 - CHILD1_WIDTH_FACTOR)
+#define CHILD2_HEIGHT_FACTOR (1.0/1.0)
 
 @interface TransportsParentVC ()
 
 @property (strong, nonatomic) TransportsMasterTVC *childVC1;
+@property (strong, nonatomic) TransportDetailTVC  *childVC2;
 
 @property BOOL isChild1Visible;
+@property BOOL isChild2Visible;
 
 @property (strong, nonatomic) UIToolbar *toolBar;
 
@@ -32,11 +37,12 @@
     NSLog(@"%%TransportsParentVC-I-TRACE, -viewDidLoad called.");
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor greenColor];
+    self.view.backgroundColor = [UIColor lightGrayColor];
     
     // Child 1 Demo VC.
     //
     self.childVC1 = [[TransportsMasterTVC alloc] init];
+    self.childVC1.view.backgroundColor = [UIColor orangeColor];
     self.childVC1.view.frame = CGRectMake(0,
                                           STATUS_BAR_HEIGHT,
                                           roundf(self.view.frame.size.width * CHILD1_WIDTH_FACTOR),
@@ -50,6 +56,24 @@
     self.isChild1Visible = YES;
     [self addChildViewController:self.childVC1];
     [self.view addSubview:self.childVC1.view];
+    
+    // Child 2 Demo VC.
+    //
+    self.childVC2 = [[TransportDetailTVC alloc] init];
+    self.childVC2.view.backgroundColor = [UIColor yellowColor];
+    self.childVC2.view.frame = CGRectMake(self.childVC1.view.frame.size.width,
+                                          STATUS_BAR_HEIGHT,
+                                          roundf(self.view.frame.size.width * CHILD2_WIDTH_FACTOR),
+                                          roundf((self.view.frame.size.height - (STATUS_BAR_HEIGHT+TOOLBAR_HEIGHT+self.tabBarController.tabBar.frame.size.height)) * CHILD2_HEIGHT_FACTOR));
+    self.childVC2.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
+                                           UIViewAutoresizingFlexibleHeight |
+                                           UIViewAutoresizingFlexibleTopMargin |
+                                           UIViewAutoresizingFlexibleBottomMargin |
+                                           UIViewAutoresizingFlexibleLeftMargin |
+                                           UIViewAutoresizingFlexibleRightMargin);
+    self.isChild2Visible = YES;
+    [self addChildViewController:self.childVC2];
+    [self.view addSubview:self.childVC2.view];
     
     // Instantiate and configure the tool bar
     //
@@ -102,16 +126,21 @@
                                                             target:self
                                                             action:@selector(doButton2:)];
     
-    UIBarButtonItem *btn3 = [[UIBarButtonItem alloc] initWithTitle:@"TBD"
+    UIBarButtonItem *btn3 = [[UIBarButtonItem alloc] initWithTitle:@"Child 2"
                                                              style:UIBarButtonItemStyleDone
                                                             target:self
                                                             action:@selector(doButton3:)];
+    
+    UIBarButtonItem *btn4 = [[UIBarButtonItem alloc] initWithTitle:@"Inspect Child2"
+                                                             style:UIBarButtonItemStyleDone
+                                                            target:self
+                                                            action:@selector(doButton2:)];
     
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:self
                                                                             action:nil];
     
-    NSArray *barButtonItems = [NSArray arrayWithObjects:spacer, btn1, spacer, btn2, spacer, btn3, spacer, nil];
+    NSArray *barButtonItems = [NSArray arrayWithObjects:spacer, btn1, spacer, btn2, spacer, btn3, spacer, btn4, spacer, nil];
     
     [self.toolBar setItems:barButtonItems];
 }
