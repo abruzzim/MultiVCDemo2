@@ -16,27 +16,21 @@
 
 - (void)viewDidLoad {
     NSLog(@"%%TransportsNC-I-TRACE, -viewDidLoad called.");
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.title = @"Transports";
     self.tabBarItem.image = [UIImage imageNamed:@"medical52"];
+    self.toolbarHidden = NO;
+    self.toolbar.translucent = YES;
+    self.toolbar.barStyle = UIBarStyleDefault;
     
 }
 
 - (void)didReceiveMemoryWarning {
     NSLog(@"%%TransportsNC-I-TRACE, -didReceiveMemoryWarning called.");
+    
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

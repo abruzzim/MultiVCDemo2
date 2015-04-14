@@ -10,24 +10,26 @@
 #import "TransportsMasterTVC.h" // 1st Child VC.
 #import "TransportDetailTVC.h"  // 2nd Child VC.
 
-#define STATUS_BAR_HEIGHT 20.0
-#define TOOLBAR_HEIGHT 44.0
 #define CHILD1_WIDTH_FACTOR (1.0/3.0)
 #define CHILD1_HEIGHT_FACTOR (1.0/1.0)
-#define CHILD2_WIDTH_FACTOR (1 - CHILD1_WIDTH_FACTOR)
+#define CHILD2_WIDTH_FACTOR (2.0/3.0)
 #define CHILD2_HEIGHT_FACTOR (1.0/1.0)
 
 @interface TransportsParentVC ()
 
-@property (strong, nonatomic) TransportsMasterTVC *childVC1;
-@property (strong, nonatomic) TransportDetailTVC  *childVC2;
+@property CGFloat statusBarFrameSizeHeight;
+@property CGFloat navBarFrameSizeHeight;
+@property CGFloat toolBarFrameSizeHeight;
+@property CGFloat tabBarFrameSizeHeight;
+@property CGFloat totalUnusableHeight;
+@property CGFloat topOffset;
 
+@property (strong, nonatomic) TransportsMasterTVC *childVC1;
 @property BOOL isChild1Visible;
+@property (strong, nonatomic) TransportDetailTVC  *childVC2;
 @property BOOL isChild2Visible;
 
-@property (strong, nonatomic) UIToolbar *toolBar;
-
-- (void)showViewProperties:(UIView *)theView;
+- (void)showViewProperties:(UIView *)aView;
 
 @end
 
@@ -35,24 +37,39 @@
 
 - (void)viewDidLoad {
     NSLog(@"%%TransportsParentVC-I-TRACE, -viewDidLoad called.");
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor lightGrayColor];
+    [self addToolbarItems];
+    [self getFrameSizeHeights];
+    
+    // Offset height from the top of the view.
+    //
+    self.topOffset = (
+                      self.statusBarFrameSizeHeight +
+                      self.navBarFrameSizeHeight
+                      );
+    
+    // Total unusable view height.
+    //
+    self.totalUnusableHeight = (
+                                self.statusBarFrameSizeHeight +
+                                self.navBarFrameSizeHeight +
+                                self.toolBarFrameSizeHeight +
+                                self.tabBarFrameSizeHeight
+                                );
     
     // Child 1 Demo VC.
     //
     self.childVC1 = [[TransportsMasterTVC alloc] init];
+    self.childVC1.view.frame =
+        CGRectMake(
+                   0,
+                   (_topOffset),
+                   roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                   roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD1_HEIGHT_FACTOR)
+                   );
     self.childVC1.view.backgroundColor = [UIColor orangeColor];
-    self.childVC1.view.frame = CGRectMake(0,
-                                          STATUS_BAR_HEIGHT,
-                                          roundf(self.view.frame.size.width * CHILD1_WIDTH_FACTOR),
-                                          roundf((self.view.frame.size.height - (STATUS_BAR_HEIGHT+TOOLBAR_HEIGHT+self.tabBarController.tabBar.frame.size.height)) * CHILD1_HEIGHT_FACTOR));
-    self.childVC1.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
-                                           UIViewAutoresizingFlexibleHeight |
-                                           UIViewAutoresizingFlexibleTopMargin |
-                                           UIViewAutoresizingFlexibleBottomMargin |
-                                           UIViewAutoresizingFlexibleLeftMargin |
-                                           UIViewAutoresizingFlexibleRightMargin);
     self.isChild1Visible = YES;
     [self addChildViewController:self.childVC1];
     [self.view addSubview:self.childVC1.view];
@@ -60,53 +77,18 @@
     // Child 2 Demo VC.
     //
     self.childVC2 = [[TransportDetailTVC alloc] init];
-    self.childVC2.view.backgroundColor = [UIColor yellowColor];
-    self.childVC2.view.frame = CGRectMake(self.childVC1.view.frame.size.width,
-                                          STATUS_BAR_HEIGHT,
-                                          roundf(self.view.frame.size.width * CHILD2_WIDTH_FACTOR),
-                                          roundf((self.view.frame.size.height - (STATUS_BAR_HEIGHT+TOOLBAR_HEIGHT+self.tabBarController.tabBar.frame.size.height)) * CHILD2_HEIGHT_FACTOR));
-    self.childVC2.view.autoresizingMask = (UIViewAutoresizingFlexibleWidth |
-                                           UIViewAutoresizingFlexibleHeight |
-                                           UIViewAutoresizingFlexibleTopMargin |
-                                           UIViewAutoresizingFlexibleBottomMargin |
-                                           UIViewAutoresizingFlexibleLeftMargin |
-                                           UIViewAutoresizingFlexibleRightMargin);
+    self.childVC2.view.frame =
+        CGRectMake(
+                   roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                   (_topOffset),
+                   roundf((self.view.frame.size.width) * CHILD2_WIDTH_FACTOR),
+                   roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD2_HEIGHT_FACTOR)
+                   );
+    self.childVC2.view.backgroundColor = [UIColor purpleColor];
     self.isChild2Visible = YES;
     [self addChildViewController:self.childVC2];
     [self.view addSubview:self.childVC2.view];
     
-    // Instantiate and configure the tool bar
-    //
-    self.toolBar = [[UIToolbar alloc] init];
-    self.toolBar.backgroundColor = [UIColor lightGrayColor];
-    self.toolBar.barStyle = UIBarStyleDefault;
-    [self addToolbarItems];
-    [self.view addSubview:self.toolBar];
-    self.toolBar.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addConstraint:
-     [NSLayoutConstraint constraintWithItem:self.toolBar
-                                  attribute:NSLayoutAttributeLeft
-                                  relatedBy:NSLayoutRelationEqual
-                                     toItem:self.view
-                                  attribute:NSLayoutAttributeLeft
-                                 multiplier:1
-                                   constant:0]];
-    [self.view addConstraint:
-     [NSLayoutConstraint constraintWithItem:self.toolBar
-                                  attribute:NSLayoutAttributeRight
-                                  relatedBy:NSLayoutRelationEqual
-                                     toItem:self.view
-                                  attribute:NSLayoutAttributeRight
-                                 multiplier:1
-                                   constant:0]];
-    [self.view addConstraint:
-     [NSLayoutConstraint constraintWithItem:self.toolBar
-                                  attribute:NSLayoutAttributeBottom
-                                  relatedBy:NSLayoutRelationEqual
-                                     toItem:self.view
-                                  attribute:NSLayoutAttributeBottom
-                                 multiplier:1
-                                   constant:-(self.tabBarController.tabBar.frame.size.height)]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,15 +116,15 @@
     UIBarButtonItem *btn4 = [[UIBarButtonItem alloc] initWithTitle:@"Inspect Child2"
                                                              style:UIBarButtonItemStyleDone
                                                             target:self
-                                                            action:@selector(doButton2:)];
+                                                            action:@selector(doButton4:)];
     
     UIBarButtonItem *spacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                             target:self
                                                                             action:nil];
     
-    NSArray *barButtonItems = [NSArray arrayWithObjects:spacer, btn1, spacer, btn2, spacer, btn3, spacer, btn4, spacer, nil];
+    NSArray *buttons = [NSArray arrayWithObjects:spacer, btn1, spacer, btn2, spacer, btn3, spacer, btn4, spacer, nil];
     
-    [self.toolBar setItems:barButtonItems];
+    self.toolbarItems = buttons;
 }
 
 - (void)doButton1:(UIButton *)sender {
@@ -196,10 +178,13 @@
         
         // Resize and shift the subview right to its assigned position.
         //
-        newFrame = CGRectMake(0,
-                              STATUS_BAR_HEIGHT,
-                              roundf(self.view.frame.size.width * CHILD1_WIDTH_FACTOR),
-                              roundf((self.view.frame.size.height - (STATUS_BAR_HEIGHT+TOOLBAR_HEIGHT+self.tabBarController.tabBar.frame.size.height)) * CHILD1_HEIGHT_FACTOR));
+        newFrame =
+            CGRectMake(
+                       0,
+                       (_topOffset),
+                       roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD1_HEIGHT_FACTOR)
+                       );
         
         [UIView animateWithDuration:0.3f animations:^{
             self.childVC1.view.frame = newFrame;
@@ -247,6 +232,84 @@
 - (void)doButton2:(UIButton *)sender {
     NSLog(@"%%TransportParentVC-I-TRACE, -doButton2 called.");
     [self showViewProperties:self.childVC1.view];
+}
+
+- (void)doButton3:(UIButton *)sender {
+    NSLog(@"%%TransportParentVC-I-TRACE, -doButton3 called.");
+    
+    if (self.isChild2Visible) {
+        
+        CGPoint newCenter;
+        
+        // Shift the subview right by its longest dimension.
+        //
+        if (self.view.frame.size.height > self.view.frame.size.width) {
+            // If the superview is in portrait orientation...
+            
+            if (self.childVC2.view.frame.size.height > self.childVC2.view.frame.size.width) {
+                // ...and if the subview is higher than it is wide,
+                // then shift the subview right by its height.
+                newCenter = CGPointMake(self.childVC2.view.center.x + self.childVC2.view.frame.size.height, self.childVC2.view.center.y);
+            } else {
+                // ...and if the subview is wider than it is high,
+                // then shift the subview right by its width.
+                newCenter = CGPointMake(self.childVC2.view.center.x + self.childVC2.view.frame.size.width, self.childVC2.view.center.y);
+            }
+            
+        } else {
+            // Else if the superview is in landscape orientation...
+            
+            if (self.childVC2.view.frame.size.width > self.childVC2.view.frame.size.height) {
+                // ...and if the subview is wider than it is high,
+                // then shift the subview right by its width.
+                newCenter = CGPointMake(self.childVC2.view.center.x + self.childVC2.view.frame.size.width, self.childVC2.view.center.y);
+            } else {
+                // ...and if the subview is higher than it is wide,
+                // then shift the subview right by its height.
+                newCenter = CGPointMake(self.childVC2.view.center.x + self.childVC2.view.frame.size.height, self.childVC2.view.center.y);
+            }
+            
+        }
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            self.childVC2.view.center = newCenter;
+        }];
+        
+    } else {
+        
+        CGRect newFrame;
+        
+        // Resize and shift the subview left to its originally assigned position.
+        //
+        newFrame =
+            CGRectMake(
+                       roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                       (_topOffset),
+                       roundf((self.view.frame.size.width) * CHILD2_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD2_HEIGHT_FACTOR)
+                       );
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            self.childVC2.view.frame = newFrame;
+        }];
+        
+    }
+    
+    self.isChild2Visible = !self.isChild2Visible;
+}
+
+- (void)doButton4:(UIButton *)sender {
+    NSLog(@"%%TransportParentVC-I-TRACE, -doButton4 called.");
+    [self showViewProperties:self.childVC2.view];
+}
+    
+- (void)getFrameSizeHeights {
+    NSLog(@"%%TransportsParentVC-I-TRACE, -currentFrameSizeHeights called.");
+        
+    self.statusBarFrameSizeHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    self.navBarFrameSizeHeight = self.navigationController.navigationBar.frame.size.height;
+    self.toolBarFrameSizeHeight = self.navigationController.toolbar.frame.size.height;
+    self.tabBarFrameSizeHeight = self.tabBarController.tabBar.frame.size.height;
 }
 
 - (void)showViewProperties:(UIView *)aView {
@@ -297,21 +360,7 @@
     NSLog(@"sub-view transform d: %f", aView.transform.d);
     NSLog(@"sub-view transform tx: %f", aView.transform.tx);
     NSLog(@"sub-view transform ty: %f", aView.transform.ty);
-
+    
 }
-
-- (void)doButton3:(UIButton *)sender {
-    NSLog(@"%%TransportParentVC-I-TRACE, -doButton3 called.");
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
