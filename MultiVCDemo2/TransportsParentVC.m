@@ -21,12 +21,17 @@
 @property CGFloat navBarFrameSizeHeight;
 @property CGFloat toolBarFrameSizeHeight;
 @property CGFloat tabBarFrameSizeHeight;
+@property CGFloat totalUnusableWidth;
 @property CGFloat totalUnusableHeight;
 @property CGFloat topOffset;
 
 @property (strong, nonatomic) TransportsMasterTVC *childVC1;
+@property (strong, nonatomic) UIView *child1VertCenterLine;
+@property (strong, nonatomic) UIView *child1HorizCenterLine;
 @property BOOL isChild1Visible;
 @property (strong, nonatomic) TransportDetailTVC  *childVC2;
+@property (strong, nonatomic) UIView *child2VertCenterLine;
+@property (strong, nonatomic) UIView *child2HorizCenterLine;
 @property BOOL isChild2Visible;
 
 - (void)showViewProperties:(UIView *)aView;
@@ -42,31 +47,17 @@
     self.view.backgroundColor = [UIColor lightGrayColor];
     [self addToolbarItems];
     [self getFrameSizeHeights];
+    [self getTopOffset];
+    [self getUnusableDimensions];
     
-    // Offset height from the top of the view.
-    //
-    self.topOffset = (
-                      self.statusBarFrameSizeHeight +
-                      self.navBarFrameSizeHeight
-                      );
-    
-    // Total unusable view height.
-    //
-    self.totalUnusableHeight = (
-                                self.statusBarFrameSizeHeight +
-                                self.navBarFrameSizeHeight +
-                                self.toolBarFrameSizeHeight +
-                                self.tabBarFrameSizeHeight
-                                );
-    
-    // Child 1 Demo VC.
+    // Child 1 Demo VC. --------------------------------------------------------------------------------|
     //
     self.childVC1 = [[TransportsMasterTVC alloc] init];
     self.childVC1.view.frame =
         CGRectMake(
                    0,
                    (_topOffset),
-                   roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                   roundf((self.view.frame.size.width - (_totalUnusableWidth)) * CHILD1_WIDTH_FACTOR),
                    roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD1_HEIGHT_FACTOR)
                    );
     self.childVC1.view.backgroundColor = [UIColor orangeColor];
@@ -88,7 +79,7 @@
         CGRectMake(
                    roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
                    (_topOffset),
-                   roundf((self.view.frame.size.width) * CHILD2_WIDTH_FACTOR),
+                   roundf((self.view.frame.size.width - (_totalUnusableWidth)) * CHILD2_WIDTH_FACTOR),
                    roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD2_HEIGHT_FACTOR)
                    );
     self.childVC2.view.backgroundColor = [UIColor purpleColor];
@@ -111,7 +102,7 @@
             CGRectMake(
                        0,
                        (_topOffset),
-                       roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.width - (_totalUnusableWidth)) * CHILD1_WIDTH_FACTOR),
                        roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD1_HEIGHT_FACTOR)
                        );
     }
@@ -121,7 +112,7 @@
             CGRectMake(
                        roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
                        (_topOffset),
-                       roundf((self.view.frame.size.width) * CHILD2_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.width - (_totalUnusableWidth)) * CHILD2_WIDTH_FACTOR),
                        roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD2_HEIGHT_FACTOR)
                        );
     }
@@ -159,7 +150,7 @@
 }
 
 - (void)doButton1:(UIButton *)sender {
-    NSLog(@"%%TransportParentVC-I-TRACE, -doButton1 called.");
+    NSLog(@"%%TransportsParentVC-I-TRACE, -doButton1 called.");
 
 #define case 1
 
@@ -213,7 +204,7 @@
             CGRectMake(
                        0,
                        (_topOffset),
-                       roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.width - (_totalUnusableWidth)) * CHILD1_WIDTH_FACTOR),
                        roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD1_HEIGHT_FACTOR)
                        );
         
@@ -261,12 +252,12 @@
 }
 
 - (void)doButton2:(UIButton *)sender {
-    NSLog(@"%%TransportParentVC-I-TRACE, -doButton2 called.");
+    NSLog(@"%%TransportsParentVC-I-TRACE, -doButton2 called.");
     [self showViewProperties:self.childVC1.view];
 }
 
 - (void)doButton3:(UIButton *)sender {
-    NSLog(@"%%TransportParentVC-I-TRACE, -doButton3 called.");
+    NSLog(@"%%TransportsParentVC-I-TRACE, -doButton3 called.");
     
     if (self.isChild2Visible) {
         
@@ -314,9 +305,9 @@
         //
         newFrame =
             CGRectMake(
-                       roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.width - (_totalUnusableWidth)) * CHILD1_WIDTH_FACTOR),
                        (_topOffset),
-                       roundf((self.view.frame.size.width) * CHILD2_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.width - (_totalUnusableWidth)) * CHILD2_WIDTH_FACTOR),
                        roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD2_HEIGHT_FACTOR)
                        );
         
@@ -330,7 +321,7 @@
 }
 
 - (void)doButton4:(UIButton *)sender {
-    NSLog(@"%%TransportParentVC-I-TRACE, -doButton4 called.");
+    NSLog(@"%%TransportsParentVC-I-TRACE, -doButton4 called.");
     [self showViewProperties:self.childVC2.view];
 }
     
@@ -343,8 +334,33 @@
     self.tabBarFrameSizeHeight = self.tabBarController.tabBar.frame.size.height;
 }
 
+- (void)getTopOffset {
+    NSLog(@"%%TransportsParentVC-I-TRACE, -getTopOffset called.");
+    
+    // Offset height from the top of the view.
+    //
+    self.topOffset = (
+                      self.statusBarFrameSizeHeight +
+                      self.navBarFrameSizeHeight
+                      );
+}
+
+- (void)getUnusableDimensions {
+    NSLog(@"%%TransportsParentVC-I-TRACE, -getUnusableDimensions called.");
+    
+    // Total unusable view dimensions.
+    //
+    self.totalUnusableWidth = (0);
+    self.totalUnusableHeight = (
+                                self.statusBarFrameSizeHeight +
+                                self.navBarFrameSizeHeight +
+                                self.toolBarFrameSizeHeight +
+                                self.tabBarFrameSizeHeight
+                                );
+}
+
 - (void)showViewProperties:(UIView *)aView {
-    NSLog(@"%%TransportParentVC-I-TRACE, -showViewProperties: called.");
+    NSLog(@"%%TransportsParentVC-I-TRACE, -showViewProperties: called.");
     
     // Super view properties.
     NSLog(@"super-view description: %@", aView.superview.description);
