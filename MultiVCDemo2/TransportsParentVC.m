@@ -45,6 +45,7 @@
     
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor lightGrayColor];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self addToolbarItems];
     [self getFrameSizeHeights];
     [self getTopOffset];
@@ -63,16 +64,9 @@
     self.childVC1.view.backgroundColor = [UIColor orangeColor];
     self.isChild1Visible = YES;
     [self addChildViewController:self.childVC1];
-    
-    // TODO: The content inset for this tableView needs to be set
-    // manually to a value of -64 for the top "margin" to compensate
-    // for the contentOffset value of {0, -64} being set by UITableView
-    // somehow. This is NOT a permanent solution.
-    //
-    [self.childVC1.tableView setContentInset:UIEdgeInsetsMake(-64, 0, 0, 0)];
     [self.view addSubview:self.childVC1.view];
     
-    // Child 2 Demo VC.
+    // Child 2 Demo VC. --------------------------------------------------------------------------------|
     //
     self.childVC2 = [[TransportDetailTVC alloc] init];
     self.childVC2.view.frame =
