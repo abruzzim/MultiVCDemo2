@@ -72,6 +72,13 @@
     self.childVC1.view.backgroundColor = [UIColor orangeColor];
     self.isChild1Visible = YES;
     [self addChildViewController:self.childVC1];
+    
+    // TODO: The content inset for this tableView needs to be set
+    // manually to a value of -64 for the top "margin" to compensate
+    // for the contentOffset value of {0, -64} being set by UITableView
+    // somehow. This is NOT a permanent solution.
+    //
+    [self.childVC1.tableView setContentInset:UIEdgeInsetsMake(-64, 0, 0, 0)];
     [self.view addSubview:self.childVC1.view];
     
     // Child 2 Demo VC.
@@ -94,6 +101,30 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    NSLog(@"%%TransportsParentVC-I-TRACE, -viewWillLayoutSubviews called.");
+    
+    if (self.isChild1Visible) {
+        self.childVC1.view.frame =
+            CGRectMake(
+                       0,
+                       (_topOffset),
+                       roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD1_HEIGHT_FACTOR)
+                       );
+    }
+    
+    if (self.isChild2Visible) {
+        self.childVC2.view.frame =
+            CGRectMake(
+                       roundf((self.view.frame.size.width) * CHILD1_WIDTH_FACTOR),
+                       (_topOffset),
+                       roundf((self.view.frame.size.width) * CHILD2_WIDTH_FACTOR),
+                       roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD2_HEIGHT_FACTOR)
+                       );
+    }
 }
 
 - (void)addToolbarItems {
