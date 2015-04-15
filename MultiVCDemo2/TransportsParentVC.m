@@ -26,7 +26,6 @@
 @property CGFloat topOffset;
 
 @property (strong, nonatomic) TransportsMasterTVC *childVC1;
-@property (strong, nonatomic) UIView *child1VertRightLine;
 @property BOOL isChild1Visible;
 @property (strong, nonatomic) TransportDetailTVC  *childVC2;
 @property BOOL isChild2Visible;
@@ -59,24 +58,8 @@
                    roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD1_HEIGHT_FACTOR)
                    );
     self.childVC1.view.backgroundColor = [UIColor orangeColor];
-    
-    /**
-     * Child 1 Vertical "Right-Margin" Line
-     */
-    self.child1VertRightLine = [[UIView alloc] initWithFrame:
-                                 CGRectMake(
-                                            roundf(self.childVC1.view.bounds.size.width - 2.0),
-                                            0.0,
-                                            2.0,
-                                            self.childVC1.view.bounds.size.height
-                                            )];
-    self.child1VertRightLine.autoresizingMask = (
-                                                  UIViewAutoresizingFlexibleHeight |
-                                                  UIViewAutoresizingFlexibleLeftMargin |
-                                                  UIViewAutoresizingFlexibleRightMargin
-                                                  );
-    self.child1VertRightLine.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
-    [self.childVC1.view addSubview:self.child1VertRightLine];
+    self.childVC1.tableView.layer.borderWidth = 1.0;
+    self.childVC1.tableView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.isChild1Visible = YES;
     [self addChildViewController:self.childVC1];
     [self.view addSubview:self.childVC1.view];
@@ -92,6 +75,8 @@
                    roundf((self.view.frame.size.height - (_totalUnusableHeight)) * CHILD2_HEIGHT_FACTOR)
                    );
     self.childVC2.view.backgroundColor = [UIColor purpleColor];
+    self.childVC2.tableView.layer.borderWidth = 1.0;
+    self.childVC2.tableView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.isChild2Visible = YES;
     [self addChildViewController:self.childVC2];
     [self.view addSubview:self.childVC2.view];
